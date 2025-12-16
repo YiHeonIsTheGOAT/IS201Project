@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Game</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            /* Isolate Tailwind CSS to the game container only */
+            @import url("https://cdn.tailwindcss.com");
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 class="site-heading text-center text-faded d-none d-lg-block">
+                <span class="site-heading-upper text-primary mb-3">MY</span>
+                <span class="site-heading-lower">Dress Up Game</span>
+            </h1>
+        </header>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Game</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="resume.html">Resume</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="scratch.html">Scratch</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="game.html">Game</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+
+<!-- Load Cabin Sketch font for a fun, stylized look -->
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+    /* Ensure navbar remains visible and above game content */
+    #mainNav {
+        position: relative;
+        z-index: 100 !important;
+    }
+
+    /* Custom styles for the embedded container (replaces 'body' styles) */
+    .embedded-game-wrapper {
+        background-color: #e0f7fa; /* Light Blue 100 */
+        /* Add a fun, hand-drawn swirl/pencil-mark pattern using SVG data URI */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%234a148c' stroke-width='1' opacity='0.1'%3E%3Cpath d='M5 5 C 20 20, 35 10, 50 25 S 80 40, 95 35' /%3E%3Cpath d='M5 50 C 15 65, 30 55, 45 70 S 75 85, 95 80' /%3E%3Cpath d='M50 5 C 65 20, 80 10, 95 25' /%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: repeat;
+        font-family: 'Cabin Sketch', cursive;
+        /* Fit within the Bootstrap container */
+        width: 100%; 
+        min-height: auto;
+        box-sizing: border-box;
+        padding: 1rem;
+        margin: 0;
+        display: block;
+    }
+
+    /* Custom animation for the character image */
+    @keyframes sway {
+        0% { transform: rotate(1deg); }
+        50% { transform: rotate(-1deg); }
+        100% { transform: rotate(1deg); }
+    }
+
+    .character-image {
+        animation: sway 5s ease-in-out infinite;
+        border: 4px solid white;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        transition: opacity 0.5s ease-in-out;
+        object-fit: contain; 
+    }
+    
+    /* Custom animation for outfit buttons */
+    @keyframes pulse-rotate {
+        0% { transform: rotate(0deg); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        50% { transform: rotate(2deg); box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+        100% { transform: rotate(0deg); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    }
+    
+    .outfit-button {
+        transition: all 0.2s ease-in-out;
+        transform: rotate(0deg);
+        animation: pulse-rotate 4s ease-in-out infinite alternate;
+        border: 3px solid white; 
+    }
+    
+    .outfit-button:hover {
+        transform: scale(1.05) rotate(5deg);
+    }
+    
+    /* Utility for the restart button */
+    .game-action-button {
+        background-color: #7ed1f7; 
+        color: white; 
+        font-weight: bold;
+        border-radius: 9999px; 
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); 
+        transition: background-color 0.15s ease-in-out;
+    }
+    .game-action-button:hover {
+        background-color: #5da3ab;
+    }
+
+    /* Mobile layout adjustments */
+    @media (max-width: 768px) {
+        .game-container {
+            flex-direction: column;
+            width: 100%;
+            padding: 1rem;
+        }
+        .outfit-controls {
+            width: 100%;
+            order: 2; 
+            margin-top: 1rem;
+        }
+        .character-display {
+            width: 100%;
+            height: auto;
+            order: 1;
+        }
+        .character-image {
+            max-width: 80%;
+            height: auto;
+        }
+    }
+</style>
+
+<!-- Main Wrapper for Embedding -->
+<div class="embedded-game-wrapper">
+
+    <!-- Content Wrapper (Adjusted classes for embedding) -->
+    <div style="width: 100%; display: block;">
+
+        <!-- Main Content Card -->
+        <div id="game-container" class="d-flex flex-column flex-md-row align-items-start justify-content-center p-3 p-md-5 w-100 rounded" style="background: rgba(255,255,255,0.5); max-width: 100%; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+
+            <!-- Character Display Area (The Duke) -->
+            <div class="character-display d-flex flex-column align-items-center justify-content-center w-100" style="padding: 1rem;">
+                <h1 class="text-4xl fw-bold mb-4 text-dark">The Duke</h1>
+                <div class="position-relative rounded" style="width: 250px; height: 350px;">
+                    <img id="character-art" src="" alt="The Duke's Current Outfit" class="character-image w-100 h-100 rounded" style="object-fit: contain;">
+                </div>
+                <p id="status-message" class="mt-4 fs-5 fw-semibold text-danger"></p>
+            </div>
+
+            <!-- Outfit Controls Area -->
+            <div id="outfit-controls" class="outfit-controls w-100" style="padding: 1rem 1rem 1rem 2rem;">
+                <h2 class="fs-4 fw-bold mb-4 text-dark">Outfits:</h2>
+                <div id="outfit-buttons-container" class="d-grid gap-3" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+                    <!-- Outfit buttons will be injected here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Game Over Modal (Hidden by default) -->
+            <div id="game-over-modal" class="position-fixed w-100 h-100 d-none" style="inset: 0; background: rgba(0,0,0,0.7); align-items: center; justify-content: center;">
+                <div class="bg-white p-5 rounded text-center" style="max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);">
+                    <h3 class="fs-2 fw-bold text-danger mb-3" id="modal-title">GAME OVER</h3>
+                    <p class="text-dark mb-4" id="modal-message">The game ended due to the character's reaction.</p>
+                    <button onclick="restartGame()" class="btn game-action-button">
+                        Restart Game
+                    </button>
+                </div>
+            </div>
+        </div> <!-- End of Main Content Card -->
+    </div> <!-- End of Content Wrapper -->
+</div> <!-- End of Main Wrapper for Embedding -->
+
+
+<!-- Firebase SDK Imports and Initialization (REQUIRED, though not used for simple state) -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Global variables provided by the canvas environment
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    let db, auth;
+    let userId = null;
+
+    // Function to initialize Firebase
+    async function initFirebase() {
+        try {
+            if (Object.keys(firebaseConfig).length === 0) {
+                console.warn("Firebase config is empty. Skipping initialization.");
+                return;
+            }
+            
+            setLogLevel('debug');
+
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            // Attempt to sign in
+            if (initialAuthToken) {
+                await signInWithCustomToken(auth, initialAuthToken);
+            } else {
+                await signInAnonymously(auth);
+            }
+
+            // Listen for auth state changes
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
+                    console.log("Firebase Auth Ready. User ID:", userId);
+                } else {
+                    userId = crypto.randomUUID();
+                    console.log("Signed in anonymously. Temporary User ID:", userId);
+                }
+            });
+
+        } catch (error) {
+            console.error("Firebase initialization or sign-in failed:", error);
+        }
+    }
+    
+    initFirebase();
+</script>
+
+<script>
+    // --- GAME DATA ---
+
+    const BASE_IMAGE_SIZE_MAIN = "400x600";
+    const BASE_IMAGE_SIZE_THUMB = "200x200";
+    // Using a white background for the drawing placeholders, with purple text.
+    const PLACEHOLDER_COLOR = "ffffff/4a148c"; 
+
+    // Helper function to generate placeholder image URLs
+    function getPImage(text, size) {
+        // Generates a descriptive placeholder image using placehold.co
+        return `https://placehold.co/${size}/${PLACEHOLDER_COLOR}?text=${encodeURIComponent(text.replace(/\s/g, '+'))}`;
+    }
+
+    const CHARACTERS = {
+        THE_DUKE: {
+            key: 'THE_DUKE',
+            name: 'The Duke',
+            initialOutfitIndex: 0,
+            angerStates: [
+                { level: 0, mainImage: 'assets/img/angrythree.jpg'},
+                { level: 1, mainImage: 'assets/img/angryone.jpg' },
+                { level: 2, mainImage: 'assets/img/angrytwo.jpg' },
+                { level: 3, mainImage: 'assets/img/angrythree.jpg', gameOver: true, message: "Don't Do that. GAME OVER." },
+            ],
+            outfits: [
+                { 
+                    name: "Normal", 
+                    mainImage: 'assets/img/normaltay.jpg',
+                    // Use the real uploaded image instead of a placeholder
+                    thumbnailImage: 'assets/img/normalclothes.jpg'
+                }, 
+                { 
+                    name: "Tired", 
+                    mainImage: 'assets/img/tiredtay.jpg',
+                    // Use the real uploaded image instead of a placeholder
+                    thumbnailImage: 'assets/img/tiredclothes.jpg'
+                },
+                { 
+                    name: "90s", 
+                    // Use the real uploaded main image instead of a generated placeholder
+                    mainImage: 'assets/img/ninetytay.jpg', 
+                    // Use the real uploaded image for the thumbnail as well
+                    thumbnailImage: 'assets/img/ninetyclothes.jpg'
+                },
+                { 
+                    name: "Battle-Ready", 
+                    // Use the real uploaded main image instead of a generated placeholder
+                    mainImage: 'assets/img/battlegirl.jpg', 
+                    thumbnailImage: 'assets/img/battleclothes.jpg'
+                },
+            ],
+            takeOffMessage: "The Duke is getting annoyed...",
+        },
+    };
+    
+    // --- GAME STATE ---
+    let state = {
+        TheDuke: {
+            currentOutfitIndex: CHARACTERS.THE_DUKE.initialOutfitIndex,
+            angerLevel: 0,
+        },
+    };
+
+    // --- DOM REFERENCES ---
+    const characterArt = document.getElementById('character-art');
+    const statusMessage = document.getElementById('status-message');
+    const outfitButtonsContainer = document.getElementById('outfit-buttons-container');
+    const gameOverModal = document.getElementById('game-over-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+
+    // --- CORE GAME LOGIC ---
+
+    function getCurrentCharacterData() {
+        return CHARACTERS.THE_DUKE;
+    }
+
+    function getCurrentCharacterState() {
+        return state.TheDuke;
+    }
+
+    /**
+     * Updates the character image and status message.
+     */
+    function updateDisplay() {
+        const charData = getCurrentCharacterData();
+        const charState = getCurrentCharacterState();
+        
+        let imageUrl;
+        let currentOutfit = charData.outfits[charState.currentOutfitIndex];
+        
+        // If character is angry (level > 0) use the anger state image
+        if (charState.angerLevel > 0) {
+            const angerState = charData.angerStates.find(s => s.level === charState.angerLevel);
+            imageUrl = angerState ? angerState.mainImage : currentOutfit.mainImage;
+        } else {
+            // Use the main image of The Duke wearing the outfit
+            imageUrl = currentOutfit.mainImage;
+        }
+
+        // Simple transition for image change
+        characterArt.style.opacity = '0';
+        setTimeout(() => {
+            characterArt.src = imageUrl;
+            characterArt.alt = `The Duke in ${currentOutfit.name}`;
+            characterArt.style.opacity = '1';
+        }, 100);
+
+        // Clear status message after a delay
+        if (charState.angerLevel === 0) {
+            statusMessage.textContent = "";
+        }
+        
+        renderOutfitButtons();
+    }
+
+    /**
+     * Handles the logic for changing an outfit.
+     * @param {number} newIndex - The index of the outfit button clicked.
+     */
+    window.handleOutfitClick = function(newIndex) {
+        const charData = getCurrentCharacterData();
+        const charState = getCurrentCharacterState();
+        
+        // Check for Game Over state first
+        if (charState.angerLevel >= charData.angerStates.length - 1) {
+            return; // Game is over, ignore clicks
+        }
+
+        const isTryingToTakeOffCurrent = newIndex === charState.currentOutfitIndex;
+
+        if (isTryingToTakeOffCurrent && newIndex === charData.initialOutfitIndex) {
+            // User is trying to take off the starting outfit (Default Tunic)
+            charState.angerLevel++;
+            
+            const currentAngerState = charData.angerStates.find(s => s.level === charState.angerLevel);
+            
+            if (currentAngerState && currentAngerState.gameOver) {
+                // Game Over Triggered
+                updateDisplay();
+                setTimeout(() => showGameOver(currentAngerState.message), 500);
+            } else {
+                // Character is just annoyed
+                statusMessage.textContent = `${charData.takeOffMessage} (Anger: ${charState.angerLevel}/${charData.angerStates.length - 1})`;
+            }
+        } else {
+            // Normal outfit change or changing outfit away from angry state
+            charState.currentOutfitIndex = newIndex;
+            charState.angerLevel = 0; // Reset anger on successful outfit change
+        }
+
+        updateDisplay();
+    }
+
+    /**
+     * Renders the interactive outfit buttons, showing the thumbnail images.
+     */
+    function renderOutfitButtons() {
+        const charData = getCurrentCharacterData();
+        const charState = getCurrentCharacterState();
+        outfitButtonsContainer.innerHTML = ''; // Clear previous buttons
+
+        charData.outfits.forEach((outfit, index) => {
+            const button = document.createElement('button');
+            const isSelected = index === charState.currentOutfitIndex;
+            
+            // Use Bootstrap classes instead of Tailwind
+            button.className = `btn outfit-button d-flex flex-column align-items-center p-3 rounded border-0 ${isSelected ? 'border border-danger' : 'border border-light'}`;
+            button.style.backgroundColor = isSelected ? '#fff' : 'rgba(255,255,255,0.7)';
+            button.style.transition = 'all 0.2s ease-in-out';
+            button.innerHTML = `
+                <div class="fw-semibold text-dark" style="font-size: 0.95rem;">${outfit.name}</div>
+                <img src="${outfit.thumbnailImage}" alt="${outfit.name} Drawing" class="mt-2 w-100" style="height: 100px; object-fit: contain; border: 1px solid #e9ecef; border-radius: 0.375rem;">
+            `;
+            button.onclick = () => handleOutfitClick(index);
+            outfitButtonsContainer.appendChild(button);
+        });
+    }
+
+    /**
+     * Displays the game over modal.
+     * @param {string} message - The custom game over message.
+     */
+    function showGameOver(message) {
+        modalTitle.textContent = 'NO MORE!';
+        modalMessage.textContent = message;
+        gameOverModal.classList.remove('d-none');
+        gameOverModal.style.display = 'flex';
+    }
+
+    /**
+     * Resets the game state and display.
+     */
+    window.restartGame = function() {
+        // Reset The Duke's state to initial values
+        state.TheDuke.currentOutfitIndex = CHARACTERS.THE_DUKE.initialOutfitIndex;
+        state.TheDuke.angerLevel = 0;
+        
+        gameOverModal.classList.add('d-none');
+        gameOverModal.style.display = 'none';
+        updateDisplay(); 
+    }
+
+    // Initialize the game display on load
+    window.onload = function() {
+        updateDisplay(); 
+    };
+
+</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section about-heading">
+            <div class="container">
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/about.jpg" alt="..." />
+                <div class="about-heading-content">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-10 mx-auto">
+                            <div class="bg-faded rounded p-5">
+                                <h2 class="section-heading mb-4">
+                                    <span class="section-heading-upper"></span>
+                                    <span class="section-heading-lower">About the Characters</span>
+                                </h2>
+                                <p>Pop into the world of the Duke and Nightmare, who have blasted into the past of 2025! Banished from the time 3003, they find themselves in a world before humanity was forced to move to another planet, and it is so different from what they imagined! Under a contract with her liege Nightmare, a demon whose one calling is to take over the world, the Duke must learn how to live in this world while fighting against people who would rather they be dead than simply banished...</p>
+                                <p class="mb-0">
+                                    <em></em>
+                                    Coming soon to webtoon & Youtube (after a religious mission).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Copyright @TaylorSadleir2025</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
